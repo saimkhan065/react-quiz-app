@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import questions from "../questions";
 import QuestionTimer from "./QuestionTimer";
 import quizCompleteBanner from "../assets/quiz-complete.png";
+import Summary from "./Summary.jsx";
 
 export default function Quiz() {
   const [userAnswer, setUserAnswer] = useState([]); //record user answers in a sequence
@@ -25,12 +26,7 @@ export default function Quiz() {
   }, [handleSelectAnswer]);
 
   if (isQuizComplete) {
-    return (
-      <div id="summary">
-        <img src={quizCompleteBanner} alt="Completed Icon" />
-        <h2>Quiz Over!</h2>
-      </div>
-    );
+    return <Summary userAnswers={userAnswer} />;
   }
   const shuffledAnswers = [...questions[activeQuestionIndex].answers];
   shuffledAnswers.sort(() => Math.random() - 0.5);
